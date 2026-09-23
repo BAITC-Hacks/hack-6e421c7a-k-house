@@ -101,23 +101,31 @@
     <section id="catalog" class="view catalog">
       <div class="section-heading row">
         <div><p class="eyebrow">ОБЩИЙ КАТАЛОГ</p><h1>Задачи, открытые<br />для студенческих команд.</h1></div>
-        <div class="filters"><label>Тема<select id="topic-filter"><option value="all">Все темы</option><option value="web">Веб-разработка</option><option value="data">Данные</option><option value="marketing">Маркетинг</option></select></label><label>Готовность<select id="readiness-filter"><option value="all">Любой уровень</option><option value="ready">Готовая 70+</option><option value="workable">Рабочая 40+</option><option value="draft">Черновик</option></select></label></div>
+        <div class="filters"><label>Тема<select id="topic-filter"><option value="all">Все темы</option><option value="web">Веб-разработка</option><option value="data">Данные</option><option value="marketing">Маркетинг</option></select></label><label>Готовность<select id="readiness-filter"><option value="all">Любой уровень</option><option value="ready">Готовая 70+</option><option value="workable">Рабочая 40+</option><option value="draft">Черновик</option></select></label><label>Сортировка<select id="sort-order"><option value="desc">Рейтинг: сначала высокий</option><option value="asc">Рейтинг: сначала низкий</option></select></label></div>
       </div>
+      <div class="catalog-bar"><p id="catalog-count" class="muted"></p><button id="reset-demo" class="link-button">Восстановить демо-данные</button></div>
       <div id="task-grid" class="task-grid"></div>
+    </section>
+
+    <section id="task-detail" class="view task-detail">
+      <button class="link-button back" data-view="catalog">← Назад в каталог</button>
+      <article id="task-detail-content" class="panel detail-panel"></article>
     </section>
 
     <section id="business" class="view business">
       <div class="section-heading"><p class="eyebrow">БИЗНЕС-СТОРОНА</p><h1>Отклики команд</h1><p>Вы сами принимаете решение. AI не назначает исполнителей автоматически.</p></div>
+      <div id="proposal-filters" class="chips" aria-label="Фильтр откликов по статусу"></div>
       <div id="proposals-list" class="proposals-list"></div>
     </section>
   </main>
 
   <dialog id="proposal-dialog">
     <form method="dialog" id="proposal-form">
-      <button class="close" value="cancel" aria-label="Закрыть">×</button>
+      <button id="proposal-close" class="close" type="button" aria-label="Закрыть">×</button>
       <p class="eyebrow">ОТКЛИК КОМАНДЫ</p><h2 id="proposal-task-title">Предложить решение</h2>
       <input type="hidden" name="taskId" />
-      <label>Название команды<input name="team" required placeholder="Например, Code Nomads" /></label>
+      <label>Название команды<input name="team" required list="team-options" autocomplete="off" placeholder="Например, Code Nomads" /></label>
+      <datalist id="team-options"></datalist>
       <label>Идея решения<textarea name="idea" required placeholder="Как вы решите задачу?"></textarea></label>
       <label>План<textarea name="plan" required placeholder="Ключевые этапы работы"></textarea></label>
       <label>Срок<input name="deadline" required placeholder="Например, 2 недели" /></label>
@@ -127,6 +135,7 @@
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
+  <script src="student-flow.js"></script>
   <script src="ai-client.js"></script>
 </body>
 </html>
