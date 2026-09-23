@@ -121,6 +121,13 @@ document.addEventListener("click", (event) => {
   else if (target.dataset.filter) { proposalFilter = target.dataset.filter; renderProposals(); }
   else if (target.dataset.action) {
     const proposal = proposals.find((item) => item.id === target.dataset.id);
+    const selectedForTask = proposal.status !== "accepted" && target.dataset.action === "accepted"
+      ? proposals.find((item) => item.taskId === proposal.taskId && item.status === "accepted" && item.id !== proposal.id)
+      : null;
+    if (selectedForTask) {
+      showToast(`Для этой задачи уже выбрана команда ${selectedForTask.team}.`);
+      return;
+    }
     proposal.status = target.dataset.action;
     save(); renderProposals();
     showToast({ accepted: "Команда выбрана вручную.", rejected: "Отклик отклонён.", pending: "Отклик снова ожидает решения." }[proposal.status]);
