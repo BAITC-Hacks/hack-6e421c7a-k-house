@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskBridge AI — задачи, готовые к работе</title>
+  <meta name="description" content="AI-платформа для подготовки бизнес-задач и выбора студенческих команд." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="TaskBridge AI, главная">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>TaskBridge <b>AI</b></span>
+    </a>
+    <nav aria-label="Главная навигация">
+      <button class="nav-link active" data-view="home">Главная</button>
+      <button class="nav-link" data-view="create">Создать задачу</button>
+      <button class="nav-link" data-view="catalog">Каталог</button>
+      <button class="nav-link" data-view="business">Мои отклики</button>
+    </nav>
+    <button class="ghost-button" data-view="create">+ Новая задача</button>
+  </header>
+
+  <main>
+    <section id="home" class="view active hero">
+      <div>
+        <p class="eyebrow">ПРАКТИЧЕСКИЕ ЗАДАЧИ БИЗНЕСА</p>
+        <h1>От «нужен сайт»<br />к задаче, готовой<br /><span>для сильной команды.</span></h1>
+        <p class="hero-copy">AI помогает бизнесу оформить задачу, объясняет её готовность и открывает студентам честный выбор реальных проектов.</p>
+        <div class="hero-actions">
+          <button class="primary-button" data-view="create">Создать задачу <span aria-hidden="true">→</span></button>
+          <button class="secondary-button" data-view="catalog">Смотреть каталог</button>
+        </div>
+      </div>
+      <aside class="score-preview" aria-label="Как работает рейтинг задачи">
+        <div class="score-ring"><strong>82</strong><span>/100</span></div>
+        <div>
+          <p class="status ready">Готовая задача</p>
+          <h2>Сервис для учёта заказов</h2>
+          <p>AI подсветил 3 поля, которые сделали задачу понятной для команды.</p>
+        </div>
+        <div class="preview-bars">
+          <div><span>Контекст и цель</span><i style="--w:100%"></i></div>
+          <div><span>Данные и материалы</span><i style="--w:70%"></i></div>
+          <div><span>Критерии успеха</span><i style="--w:80%"></i></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="create" class="view workflow">
+      <div class="section-heading">
+        <p class="eyebrow">НОВАЯ БИЗНЕС-ЗАДАЧА</p>
+        <h1>Сначала — черновик.<br />Остальное разберём вместе.</h1>
+        <p>AI не придумает факты за вас: он заметит пробелы и задаст точные вопросы.</p>
+      </div>
+      <div class="steps" aria-label="Этапы создания задачи">
+        <span class="step active">1. Черновик</span><span class="line"></span>
+        <span class="step">2. Уточнение</span><span class="line"></span>
+        <span class="step">3. Карточка</span><span class="line"></span>
+        <span class="step">4. Публикация</span>
+      </div>
+
+      <article id="draft-panel" class="panel">
+        <label for="draft">Опишите вашу потребность или задачу</label>
+        <textarea id="draft" rows="5" placeholder="Например: Нужен сайт для учёта заказов нашей кофейни."></textarea>
+        <p class="hint">Достаточно пары предложений. Карточку можно будет редактировать перед публикацией.</p>
+        <button id="analyze-button" class="primary-button">AI: найти, что уточнить <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article id="questions-panel" class="panel hidden">
+        <div class="panel-title">
+          <div><p class="eyebrow">AI-АНАЛИЗ</p><h2>Нужно уточнить 3 вещи</h2></div>
+          <span class="ai-pill">AI не добавляет факты</span>
+        </div>
+        <p id="analysis-summary" class="muted"></p>
+        <div id="questions" class="questions"></div>
+        <button id="build-card-button" class="primary-button">Собрать карточку задачи <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article id="card-panel" class="panel hidden">
+        <div class="panel-title"><div><p class="eyebrow">РЕДАКТИРУЕМАЯ КАРТОЧКА</p><h2>Проверьте перед публикацией</h2></div><div id="live-score" class="live-score">0 / 100</div></div>
+        <form id="task-form" class="task-form">
+          <label>Название<input name="title" required placeholder="Короткое название задачи" /></label>
+          <label>Контекст и потребность<textarea name="context" required></textarea><small>20 баллов</small></label>
+          <label>Пользователи<textarea name="users" placeholder="Кто будет пользоваться решением?"></textarea><small>10 баллов</small></label>
+          <label>Данные и материалы<textarea name="data" placeholder="Какие данные, примеры или источники доступны?"></textarea><small>20 баллов</small></label>
+          <label>Ожидаемый результат<textarea name="result" placeholder="Что именно должна получить компания?"></textarea><small>15 баллов</small></label>
+          <label>Критерии успеха<textarea name="success" placeholder="Как поймёте, что результат принят?"></textarea><small>15 баллов</small></label>
+          <label>Ограничения<textarea name="constraints" placeholder="Сроки, технологии, доступы, бюджет"></textarea><small>10 баллов</small></label>
+          <label>Контакт и формат взаимодействия<textarea name="contact" placeholder="Кто консультирует команду и как часто?"></textarea><small>10 баллов</small></label>
+        </form>
+        <div class="score-breakdown"><h3>Почему такой рейтинг</h3><ul id="score-list"></ul></div>
+        <button id="publish-button" class="primary-button">Подтвердить и опубликовать <span aria-hidden="true">→</span></button>
+      </article>
+    </section>
+
+    <section id="catalog" class="view catalog">
+      <div class="section-heading row">
+        <div><p class="eyebrow">ОБЩИЙ КАТАЛОГ</p><h1>Задачи, открытые<br />для студенческих команд.</h1></div>
+        <div class="filters"><label>Тема<select id="topic-filter"><option value="all">Все темы</option><option value="web">Веб-разработка</option><option value="data">Данные</option><option value="marketing">Маркетинг</option></select></label><label>Готовность<select id="readiness-filter"><option value="all">Любой уровень</option><option value="ready">Готовая 70+</option><option value="workable">Рабочая 40+</option><option value="draft">Черновик</option></select></label></div>
+      </div>
+      <div id="task-grid" class="task-grid"></div>
+    </section>
+
+    <section id="business" class="view business">
+      <div class="section-heading"><p class="eyebrow">БИЗНЕС-СТОРОНА</p><h1>Отклики команд</h1><p>Вы сами принимаете решение. AI не назначает исполнителей автоматически.</p></div>
+      <div id="proposals-list" class="proposals-list"></div>
+    </section>
+  </main>
+
+  <dialog id="proposal-dialog">
+    <form method="dialog" id="proposal-form">
+      <button class="close" value="cancel" aria-label="Закрыть">×</button>
+      <p class="eyebrow">ОТКЛИК КОМАНДЫ</p><h2 id="proposal-task-title">Предложить решение</h2>
+      <input type="hidden" name="taskId" />
+      <label>Название команды<input name="team" required placeholder="Например, Code Nomads" /></label>
+      <label>Идея решения<textarea name="idea" required placeholder="Как вы решите задачу?"></textarea></label>
+      <label>План<textarea name="plan" required placeholder="Ключевые этапы работы"></textarea></label>
+      <label>Срок<input name="deadline" required placeholder="Например, 2 недели" /></label>
+      <label>Ссылка на прототип<input name="link" type="url" placeholder="https://..." /></label>
+      <button class="primary-button" value="default">Отправить отклик</button>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
