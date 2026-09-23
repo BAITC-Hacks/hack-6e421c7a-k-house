@@ -4,17 +4,19 @@ const fallbackQuestions = [
   ["Как вы поймёте, что задача успешно решена?", "success", "Например: менеджер собирает отчёт без Excel."],
   ["Какие сроки или технические ограничения есть?", "constraints", "Например: запуск до 15 октября, только веб."]
 ];
+function escapeHtml(value = "") {
+  return String(value).replace(/[&<>"']/g, (symbol) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[symbol]));
+}
 function renderAiQuestions(questions, fields = []) {
   const container = document.querySelector("#questions");
   container.innerHTML = questions.slice(0, 4).map((question, index) => {
     const field = fields[index] || fallbackQuestions[index]?.[1] || "constraints";
-    return `<div class="question"><label for="answer-${index}">${index + 1}. ${question}</label><input id="answer-${index}" data-field="${field}" placeholder="Ваш ответ" /></div>`;
+    return `<div class="question"><label for="answer-${index}">${index + 1}. ${escapeHtml(question)}</label><input id="answer-${index}" data-field="${field}" placeholder="Ваш ответ" /></div>`;
   }).join("");
   document.querySelector("#questions-panel").classList.remove("hidden");
   document.querySelector("#questions-panel").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 document.querySelector("#analyze-button").addEventListener("click", async (event) => {
-  event.stopImmediatePropagation();
   const draft = document.querySelector("#draft").value.trim();
   if (draft.length < 10) return window.showToast?.("Опишите задачу хотя бы парой предложений.");
   const button = event.currentTarget; button.disabled = true; button.textContent = "AI анализирует…";
