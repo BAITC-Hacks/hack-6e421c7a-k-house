@@ -1,0 +1,160 @@
+{
+  "taskDrafts": [
+    {
+      "id": "draft-1",
+      "text": "Нужен сайт для учёта заказов кофейни.",
+      "topic": "web"
+    },
+    {
+      "id": "draft-2",
+      "text": "Хотим понимать, какие товары лучше продаются.",
+      "topic": "data"
+    },
+    {
+      "id": "draft-3",
+      "text": "Нужно больше заявок на наш курс.",
+      "topic": "marketing"
+    },
+    {
+      "id": "draft-4",
+      "text": "Требуется страница для записи на мероприятия.",
+      "topic": "web"
+    },
+    {
+      "id": "draft-5",
+      "text": "Хотим оценивать эффективность рекламных постов.",
+      "topic": "data"
+    }
+  ],
+  "teams": [
+    {
+      "id": "team-1",
+      "name": "Code Nomads",
+      "interests": [
+        "web"
+      ],
+      "skills": [
+        "React",
+        "UI/UX"
+      ],
+      "technologies": [
+        "TypeScript",
+        "Figma"
+      ]
+    },
+    {
+      "id": "team-2",
+      "name": "Data Nomads",
+      "interests": [
+        "data"
+      ],
+      "skills": [
+        "analytics",
+        "dashboard"
+      ],
+      "technologies": [
+        "Python",
+        "SQL"
+      ]
+    },
+    {
+      "id": "team-3",
+      "name": "Pixel Forge",
+      "interests": [
+        "marketing",
+        "web"
+      ],
+      "skills": [
+        "design",
+        "content"
+      ],
+      "technologies": [
+        "Figma",
+        "Next.js"
+      ]
+    },
+    {
+      "id": "team-4",
+      "name": "Byte Builders",
+      "interests": [
+        "web",
+        "data"
+      ],
+      "skills": [
+        "backend",
+        "API"
+      ],
+      "technologies": [
+        "Node.js",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "id": "team-5",
+      "name": "Impact Crew",
+      "interests": [
+        "marketing"
+      ],
+      "skills": [
+        "research",
+        "strategy"
+      ],
+      "technologies": [
+        "Notion",
+        "Canva"
+      ]
+    }
+  ],
+  "proposals": [
+    {
+      "id": "proposal-1",
+      "taskId": "seed-1",
+      "teamId": "team-2",
+      "idea": "Соберём дашборд продаж с фильтрами.",
+      "plan": "Анализ → макет → разработка → тест",
+      "deadline": "12 дней",
+      "prototypeUrl": "https://example.com",
+      "status": "pending"
+    },
+    {
+      "id": "proposal-2",
+      "taskId": "seed-2",
+      "teamId": "team-1",
+      "idea": "Сделаем адаптивный лендинг.",
+      "plan": "Структура → дизайн → вёрстка",
+      "deadline": "7 дней",
+      "prototypeUrl": "https://example.com",
+      "status": "pending"
+    },
+    {
+      "id": "proposal-3",
+      "taskId": "seed-3",
+      "teamId": "team-3",
+      "idea": "Составим контент-план и шаблоны.",
+      "plan": "Аудит → рубрики → публикации",
+      "deadline": "5 дней",
+      "prototypeUrl": "https://example.com",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-4",
+      "taskId": "seed-4",
+      "teamId": "team-4",
+      "idea": "Соберём форму записи и админ-таблицу.",
+      "plan": "UX → API → интерфейс",
+      "deadline": "10 дней",
+      "prototypeUrl": "https://example.com",
+      "status": "pending"
+    },
+    {
+      "id": "proposal-5",
+      "taskId": "seed-5",
+      "teamId": "team-5",
+      "idea": "Настроим метрики и отчёт.",
+      "plan": "Сбор данных → анализ → выводы",
+      "deadline": "6 дней",
+      "prototypeUrl": "https://example.com",
+      "status": "rejected"
+    }
+  ]
+}
