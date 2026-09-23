@@ -37,7 +37,11 @@ async function analyzeDraft(draft) {
   });
   if (!response.ok) throw new Error(`OpenAI request failed: ${response.status}`);
   const result = await response.json();
-  const parsed = JSON.parse(result.output_text);
+  const text = result.output_text || result.output
+    ?.flatMap((item) => item.content || [])
+    .find((item) => item.type === "output_text")?.text;
+  if (!text) throw new Error("AI returned no structured text");
+  const parsed = JSON.parse(text);
   if (!Array.isArray(parsed.questions) || parsed.questions.length < 3) throw new Error("Invalid AI response");
   return parsed;
 }
