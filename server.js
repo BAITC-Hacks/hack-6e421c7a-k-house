@@ -14,6 +14,19 @@ const schema = {
   required: ["questions", "missingFields"]
 };
 
+async function loadLocalEnv() {
+  try {
+    const env = await readFile(join(root, ".env"), "utf8");
+    for (const line of env.split(/\r?\n/)) {
+      const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
+      if (match && !process.env[match[1]]) process.env[match[1]] = match[2].trim().replace(/^['"]|['"]$/g, "");
+    }
+  } catch {
+    // The manual fallback mode remains available when .env is absent.
+  }
+}
+await loadLocalEnv();
+
 function send(res, code, body, type = "application/json") {
   res.writeHead(code, { "Content-Type": type });
   res.end(Buffer.isBuffer(body) || typeof body === "string" ? body : JSON.stringify(body));
