@@ -45,26 +45,12 @@ function level(score) {
 // Каталог, карточка задачи и отклики — в student-flow.js.
 function escapeHtml(value = "") { return String(value ?? "").replace(/[&<>"']/g, (symbol) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[symbol])); }
 
-$("#analyze-button").addEventListener("click", () => {
-  const draft = $("#draft").value.trim();
-  if (draft.length < 10) return showToast("Опишите задачу хотя бы парой предложений.");
-  $("#questions-panel").classList.remove("hidden");
-  $("#analysis-summary").textContent = "В черновике есть задача, но пока не хватает деталей, чтобы команде оценить объём и результат.";
-  const prompts = [
-    ["Кто будет пользоваться результатом?", "Например: менеджеры кофейни, владельцы точек, клиенты."],
-    ["Какие данные, материалы или примеры уже доступны?", "Например: CSV с заказами, брендбук, ссылка на текущий сайт."],
-    ["Как вы поймёте, что задача успешно решена?", "Например: менеджер может собрать отчёт без Excel."],
-    ["Какие есть сроки или технические ограничения?", "Например: запуск до 15 октября, нужен только веб-интерфейс."]
-  ];
-  $("#questions").innerHTML = prompts.map(([question, placeholder], index) => `<div class="question"><label for="answer-${index}">${index + 1}. ${question}</label><input id="answer-${index}" data-field="${["users", "data", "success", "constraints"][index]}" placeholder="${placeholder}" /></div>`).join("");
-  $("#questions-panel").scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
 $("#build-card-button").addEventListener("click", () => {
   const draft = $("#draft").value.trim();
   const answers = Object.fromEntries([...document.querySelectorAll("#questions input")].map((input) => [input.dataset.field, input.value.trim()]));
   const form = $("#task-form");
-  form.title.value = draft.split(/[.!?]/)[0].replace(/^нужен[а-яё ]*/i, "").trim() || "Новая бизнес-задача";
+  const title = draft.split(/[.!?]/)[0].replace(/^(?:нам\s+)?нуж(?:ен|на|но|ны)\s+/i, "").trim();
+  form.title.value = title ? title[0].toUpperCase() + title.slice(1) : "Новая бизнес-задача";
   form.context.value = draft;
   Object.entries(answers).forEach(([field, value]) => { if (form[field]) form[field].value = value; });
   $("#card-panel").classList.remove("hidden");
