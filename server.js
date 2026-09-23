@@ -15,7 +15,8 @@ const schema = {
 };
 
 function send(res, code, body, type = "application/json") {
-  res.writeHead(code, { "Content-Type": type }); res.end(typeof body === "string" ? body : JSON.stringify(body));
+  res.writeHead(code, { "Content-Type": type });
+  res.end(Buffer.isBuffer(body) || typeof body === "string" ? body : JSON.stringify(body));
 }
 async function parseJson(req) {
   let raw = ""; for await (const chunk of req) raw += chunk;
@@ -47,6 +48,7 @@ async function analyzeDraft(draft) {
 }
 createServer(async (req, res) => {
   try {
+    if (req.method === "GET" && req.url === "/favicon.ico") return send(res, 204, "", "image/x-icon");
     if (req.method === "POST" && req.url === "/api/analyze-task") {
       const { draft } = await parseJson(req);
       if (typeof draft !== "string" || draft.trim().length < 10) return send(res, 400, { error: "Draft must contain at least 10 characters." });
